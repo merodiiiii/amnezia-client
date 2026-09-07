@@ -40,6 +40,8 @@ void MacOSStatusIcon::setIcon(const QString& iconPath) {
   NSImage* image = [[NSImage alloc] initWithData:resource.uncompressedData().toNSData()];
   CGFloat side = [[NSStatusBar systemStatusBar] thickness] - 4.0;
   image.size = NSMakeSize(side, side);
+  // Let AppKit adapt the icon to the menu bar background and selection state.
+  [image setTemplate:YES];
   static_cast<NSStatusItem*>(m_statusItem).button.image = image;
   [image release];
 }
